@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semaforo Inteligente - Fase 4</title>
+    <title>Semaforo Inteligente - Entrega Final</title>
     <style>
-        /* --- CSS NOVO E MELHORADO --- */
-        
+        /* --- VISUAL ESTILO DARK (Mantido) --- */
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            /* Fundo degradê moderno (Estilo Dark Mode/Urbano) */
             background: radial-gradient(circle at center, #3a404d 0%, #1a1c20 100%);
             color: #ecf0f1;
             display: flex;
@@ -20,19 +18,8 @@
             padding: 20px;
         }
 
-        h1 { 
-            margin-bottom: 5px; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-        .subtitle { 
-            color: #95a5a6; 
-            margin-bottom: 40px; 
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        h1 { margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); font-weight: 300; letter-spacing: 1px; }
+        .subtitle { color: #95a5a6; margin-bottom: 40px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; }
 
         .container {
             display: flex;
@@ -42,7 +29,7 @@
             align-items: flex-start;
         }
 
-        /* --- O NOVO SEMÁFORO --- */
+        /* --- SEMÁFORO 3D --- */
         .traffic-light {
             background-color: #2c3e50;
             padding: 25px;
@@ -50,109 +37,49 @@
             display: flex;
             flex-direction: column;
             gap: 25px;
-            /* Efeito 3D na caixa do semáforo */
-            box-shadow: 
-                15px 15px 30px rgba(0,0,0,0.6), 
-                inset 2px 2px 5px rgba(255,255,255,0.1),
-                inset -2px -2px 5px rgba(0,0,0,0.5);
+            box-shadow: 15px 15px 30px rgba(0,0,0,0.6), inset 2px 2px 5px rgba(255,255,255,0.1), inset -2px -2px 5px rgba(0,0,0,0.5);
             border: 6px solid #1a252f;
             position: relative;
         }
-
-        /* Haste do semáforo (detalhe visual) */
         .traffic-light::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: #1a252f;
+            content: ''; position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+            width: 20px; height: 20px; background: #1a252f;
         }
 
         .light {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background-color: #111; /* Cor da luz apagada (vidro escuro) */
-            border-top: 4px solid #000; /* Efeito de profundidade */
-            transition: all 0.2s ease-in-out;
-            opacity: 0.3; /* Apagado fica meio transparente */
+            width: 90px; height: 90px; border-radius: 50%;
+            background-color: #111; border-top: 4px solid #000;
+            transition: all 0.2s ease-in-out; opacity: 0.3;
         }
 
-        /* Classes ATIVAS com brilho intenso (Glow) */
-        .red.active { 
-            background-color: #ff3b30; 
-            opacity: 1;
-            box-shadow: 0 0 30px #ff3b30, inset 0 0 20px #ff9f9a;
-        }
-        .yellow.active { 
-            background-color: #ffcc00; 
-            opacity: 1;
-            box-shadow: 0 0 30px #ffcc00, inset 0 0 20px #ffeebb;
-        }
-        .green.active { 
-            background-color: #4cd964; 
-            opacity: 1;
-            box-shadow: 0 0 30px #4cd964, inset 0 0 20px #aaffb8;
-        }
+        .red.active { background-color: #ff3b30; opacity: 1; box-shadow: 0 0 30px #ff3b30, inset 0 0 20px #ff9f9a; }
+        .yellow.active { background-color: #ffcc00; opacity: 1; box-shadow: 0 0 30px #ffcc00, inset 0 0 20px #ffeebb; }
+        .green.active { background-color: #4cd964; opacity: 1; box-shadow: 0 0 30px #4cd964, inset 0 0 20px #aaffb8; }
 
-        /* --- PAINEL DE CONTROLE (Mantido limpo) --- */
+        /* --- PAINEL --- */
         .control-panel {
-            background: rgba(255, 255, 255, 0.05); /* Vidro fosco */
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 15px;
-            width: 300px;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px);
+            padding: 30px; border-radius: 15px; width: 300px;
+            border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-
         h3 { border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 10px; margin-top: 0; }
-
         .control-group { margin-bottom: 25px; }
-        
-        label { display: block; margin-bottom: 10px; font-weight: 500; font-size: 0.95rem; cursor: pointer; }
-        
-        /* Slider personalizado */
-        input[type="range"] {
-            width: 100%;
-            accent-color: #3498db;
-        }
-        
-        /* Checkboxes maiores */
-        input[type="checkbox"] {
-            transform: scale(1.2);
-            margin-right: 10px;
-            accent-color: #e74c3c;
-        }
+        label { display: block; margin-bottom: 10px; font-weight: 500; cursor: pointer; }
+        input[type="range"] { width: 100%; accent-color: #3498db; }
+        input[type="checkbox"] { transform: scale(1.2); margin-right: 10px; accent-color: #e74c3c; }
 
         .status-box {
-            background-color: #1e272e;
-            color: #00d2d3;
-            padding: 15px;
-            border-radius: 6px;
-            font-family: 'Consolas', 'Courier New', monospace;
-            height: 130px;
-            overflow-y: auto;
-            margin-top: 20px;
-            font-size: 0.85em;
+            background-color: #1e272e; color: #00d2d3; padding: 15px;
+            border-radius: 6px; font-family: 'Consolas', 'Courier New', monospace;
+            height: 130px; overflow-y: auto; margin-top: 20px; font-size: 0.85em;
             border: 1px solid #333;
-            box-shadow: inset 0 0 10px #000;
         }
-
-        /* Scrollbar bonitinha para o log */
-        .status-box::-webkit-scrollbar { width: 8px; }
-        .status-box::-webkit-scrollbar-track { background: #1e272e; }
-        .status-box::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
-
     </style>
 </head>
 <body>
 
-    <h1>🚦 Semáforo Inteligente MVP</h1>
-    <div class="subtitle">Fase 4 - Algoritmo Adaptativo</div>
+    <h1>🚦 Semáforo Inteligente</h1>
+    <div class="subtitle">Demonstração de Lógica de Controle</div>
 
     <div class="container">
         <div class="traffic-light">
@@ -162,50 +89,39 @@
         </div>
 
         <div class="control-panel">
-            <h3>⚙️ Simulação de Sensores</h3>
+            <h3>⚙️ Sensores (Entradas)</h3>
             
             <div class="control-group">
-                <label>Fluxo de Veículos: <span id="flow-value">10</span>/min</label>
+                <label>Fluxo: <span id="flow-value">10</span> carros/min</label>
                 <input type="range" id="sensor-flow" min="0" max="100" value="10">
-                <small style="color:#bdc3c7; font-size: 0.8em;"> > 60 ativa modo Fluxo Alto</small>
+                <small style="color:#bdc3c7">Acima de 60 = Fluxo Alto</small>
             </div>
 
             <div class="control-group">
-                <label>
-                    <input type="checkbox" id="sensor-rain"> 🌧️ Sensor de Chuva
-                </label>
+                <label><input type="checkbox" id="sensor-rain"> 🌧️ Chuva Forte</label>
             </div>
 
             <div class="control-group">
-                <label>
-                    <input type="checkbox" id="sensor-server" checked> 📡 Conexão Nuvem
-                </label>
+                <label><input type="checkbox" id="sensor-server" checked> 📡 Servidor Conectado</label>
             </div>
 
             <div class="control-group">
-                <label style="color: #ff6b6b;">
-                    <input type="checkbox" id="sensor-fail"> ⚠️ Falha (Modo Seguro)
-                </label>
+                <label style="color: #ff6b6b;"><input type="checkbox" id="sensor-fail"> ⚠️ Quebrar Sensor</label>
             </div>
 
             <div class="status-box" id="system-log">
-                > Booting System...<br>
-                > Sensors Online.<br>
-                > Ready.
+                > Sistema Iniciado.<br>
             </div>
         </div>
     </div>
 
     <script>
-        // Configurações Padrão
-        const TEMPO_VERDE_PADRAO = 3000; 
-        const TEMPO_AMARELO_PADRAO = 1000; 
-        const TEMPO_VERMELHO_PADRAO = 3000;
+        const TEMPO_VERDE_BASE = 3000; 
+        const TEMPO_AMARELO_BASE = 1000; 
+        const TEMPO_VERMELHO_BASE = 3000;
 
-        // Estado do Sistema
-        let historicoFluxo = []; 
         let modoSegurancaAtivo = false;
-
+        
         // Referências HTML
         const lights = {
             red: document.getElementById('light-red'),
@@ -213,21 +129,17 @@
             green: document.getElementById('light-green')
         };
         const log = document.getElementById('system-log');
-        const flowSlider = document.getElementById('sensor-flow');
-        const flowDisplay = document.getElementById('flow-value');
-
-        // Atualiza valor do slider na tela
-        flowSlider.addEventListener('input', (e) => {
-            flowDisplay.innerText = e.target.value;
+        
+        // Atualiza numero slider
+        document.getElementById('sensor-flow').addEventListener('input', (e) => {
+            document.getElementById('flow-value').innerText = e.target.value;
         });
 
-        // Função de Log
         function addLog(msg) {
             const time = new Date().toLocaleTimeString().split(' ')[0];
             log.innerHTML = `[${time}] ${msg}<br>` + log.innerHTML;
         }
 
-        // Função para apagar todas as luzes
         function resetLights() {
             lights.red.classList.remove('active');
             lights.yellow.classList.remove('active');
@@ -235,73 +147,88 @@
         }
 
         // --- ALGORITMO PRINCIPAL ---
-
         async function executarCiclo() {
+            // Ler dados (Entradas)
             const fluxo = parseInt(document.getElementById('sensor-flow').value);
-            const chovendo = document.getElementById('sensor-rain').checked;
+            const chuva = document.getElementById('sensor-rain').checked;
             const servidorOnline = document.getElementById('sensor-server').checked;
             const falhaSensor = document.getElementById('sensor-fail').checked;
 
-            historicoFluxo.push(fluxo);
-            if(historicoFluxo.length > 5) historicoFluxo.shift();
-
+            // ====================================================
+            // REGRA 3: Se sensor falhar -> Modo Segurança (Pisca Amarelo)
+            // ====================================================
             if (falhaSensor) {
                 if (!modoSegurancaAtivo) {
                     modoSegurancaAtivo = true;
-                    addLog("❌ FALHA CRÍTICA! Iniciando Modo Segurança.");
+                    addLog("❌ ERRO: Sensor Falhou. ATIVANDO MODO SEGURANÇA.");
                     piscarAmarelo();
                 }
-                return; 
+                return; // Encerra o ciclo normal
             } else {
                 modoSegurancaAtivo = false;
             }
 
-            let modoOperacao = servidorOnline ? "ONLINE" : "LOCAL";
-            
-            let tempoVerde = TEMPO_VERDE_PADRAO;
-            let tempoAmarelo = TEMPO_AMARELO_PADRAO;
-            let msgDecisao = "";
+            // ====================================================
+            // REGRA 4: Se servidor cair -> Rodar Localmente
+            // ====================================================
+            let modoStr = "";
+            if (servidorOnline) {
+                modoStr = "NUVEM";
+            } else {
+                modoStr = "LOCAL";
+                // O código continua rodando, mas agora em modo 'Local'
+            }
 
+            // Ajuste dos Tempos
+            let tVerde = TEMPO_VERDE_BASE;
+            let tAmarelo = TEMPO_AMARELO_BASE;
+            let msgLog = "";
+
+            // ====================================================
+            // REGRA 1: Se Fluxo Alto -> Aumentar Verde
+            // ====================================================
             if (fluxo > 60) {
-                tempoVerde += 2000; 
-                msgDecisao += " | ⬆️ Fluxo Alto";
+                tVerde += 3000; // Adiciona 3 segundos
+                msgLog += " | ⬆️ Fluxo Alto (+Verde)";
             }
 
-            if (chovendo) {
-                tempoAmarelo += 1500; 
-                msgDecisao += " | 🌧️ Pista Molhada";
+            // ====================================================
+            // REGRA 2: Se Chuva -> Reduzir Velocidade e Aumentar Amarelo
+            // ====================================================
+            if (chuva) {
+                tAmarelo += 2000; // Adiciona 2 segundos de frenagem
+                msgLog += " | 🌧️ Chuva (Velocidade Reduzida/Mais Amarelo)";
             }
 
-            // Fase VERDE
-            addLog(`🟢 VERDE (${modoOperacao}) ${msgDecisao}`);
+            // --- EXECUÇÃO DAS LUZES ---
+            
+            // SINAL VERDE
+            addLog(`🟢 VERDE [${modoStr}] ${msgLog}`);
             resetLights();
             lights.green.classList.add('active');
-            await sleep(tempoVerde);
+            await sleep(tVerde);
+            if(checkFail()) return;
 
-            if(checkInterruption()) return;
-
-            // Fase AMARELA
-            addLog(`🟡 AMARELO (${tempoAmarelo/1000}s)`);
+            // SINAL AMARELO
+            addLog(`🟡 AMARELO (${tAmarelo/1000}s) - Atenção`);
             resetLights();
             lights.yellow.classList.add('active');
-            await sleep(tempoAmarelo);
+            await sleep(tAmarelo);
+            if(checkFail()) return;
 
-            if(checkInterruption()) return;
-
-            // Fase VERMELHA
+            // SINAL VERMELHO
             addLog(`🔴 VERMELHO`);
             resetLights();
             lights.red.classList.add('active');
-            await sleep(TEMPO_VERMELHO_PADRAO);
+            await sleep(TEMPO_VERMELHO_BASE);
+            if(checkFail()) return;
 
-            if(checkInterruption()) return;
-
+            // Reinicia loop
             executarCiclo();
         }
 
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
+        // Funções Auxiliares
+        function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
         async function piscarAmarelo() {
             while (document.getElementById('sensor-fail').checked) {
@@ -310,18 +237,18 @@
                 lights.yellow.classList.add('active');
                 await sleep(500);
             }
-            addLog("✅ Sensor recuperado. Reiniciando...");
+            addLog("✅ Sensor reparado. Reiniciando...");
             executarCiclo();
         }
 
-        function checkInterruption() {
+        function checkFail() {
             if (document.getElementById('sensor-fail').checked && !modoSegurancaAtivo) {
-                executarCiclo(); 
-                return true;
+                executarCiclo(); return true;
             }
             return false;
         }
 
+        // Iniciar
         setTimeout(executarCiclo, 1000);
 
     </script>
